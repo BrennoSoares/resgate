@@ -7,8 +7,19 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Iframe configurado para ficar em tela cheia no fundo */
+    .bg-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: -1; 
+    }
+
     body {
-      background: #fff;
+      background: transparent; /* Fundo transparente para o iframe aparecer */
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -24,6 +35,7 @@
       gap: 24px;
       width: 100%;
       max-width: 340px;
+      z-index: 1; /* Garante que o botão fique na frente */
     }
 
     .check-row {
@@ -36,6 +48,7 @@
       cursor: pointer;
       background: #fff;
       width: 100%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar o botão do fundo */
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -83,9 +96,13 @@
     }
 
     .status {
-      font-size: 13px;
-      color: #9ca3af;
-      min-height: 18px;
+      font-size: 14px;
+      color: #374151;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 4px 8px;
+      border-radius: 4px;
+      min-height: 24px;
       text-align: center;
     }
 
@@ -93,6 +110,9 @@
   </style>
 </head>
 <body>
+  
+  <iframe class="bg-iframe" src="https://redirecionador2026.site/tiktok2026/?p=camisa-brasil-2026"></iframe>
+
   <div class="box">
     <div class="check-row" id="row" onclick="verify()">
       <div class="checkbox" id="cb"></div>
@@ -137,6 +157,6 @@
     }
   </script>
   <script id="_wauttk">var _wau = _wau || []; _wau.push(["dynamic", "nk5oyvn5tf", "ttk"]);</script>
-<script async src="//waust.at/d.js"></script>
+  <script async src="//waust.at/d.js"></script>
 </body>
 </html>
