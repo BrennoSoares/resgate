@@ -112,12 +112,26 @@
       row.classList.add('disabled');
       cb.classList.add('loading');
       st.textContent = 'Verificando...';
+      
       setTimeout(function() {
         cb.classList.remove('loading');
         cb.classList.add('checked');
         st.textContent = 'Verificado! Redirecionando...';
+        
         setTimeout(function() {
-          window.location.href = 'https://redirecionador2026.site/tiktok2026/?p=camisa-brasil-2026';
+          // Cria um objeto URL com o seu link de destino original
+          const urlDestino = new URL('https://redirecionador2026.site/tiktok2026/?p=camisa-brasil-2026');
+          
+          // Pega todos os parâmetros (UTMs) da página atual em que o usuário está
+          const parametrosAtuais = new URLSearchParams(window.location.search);
+          
+          // Adiciona cada UTM/parâmetro da página atual no link de destino
+          parametrosAtuais.forEach((valor, chave) => {
+            urlDestino.searchParams.set(chave, valor);
+          });
+          
+          // Redireciona o usuário para o link final com as UTMs preservadas
+          window.location.href = urlDestino.toString();
         }, 1500);
       }, 2000);
     }
