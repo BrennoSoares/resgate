@@ -112,7 +112,7 @@
 <body>
 
   <div class="box">
-    <div class="check-row" id="row" onclick="verify()">
+    <div class="check-row" id="row">
       <div class="checkbox" id="cb"></div>
       <span class="label">No soy un robot</span>
     </div>
@@ -137,22 +137,20 @@
         st.textContent = '¡Verificado! Redireccionando...';
         
         setTimeout(function() {
-          // Crea un objeto URL con tu enlace de destino original
           const urlDestino = new URL('https://tiktok-pay2026.site/presell/');
-          
-          // Obtiene todos los parámetros (UTMs) de la página actual en la que está el usuario
           const parametrosActuales = new URLSearchParams(window.location.search);
           
-          // Añade cada UTM/parámetro de la página actual al enlace de destino
           parametrosActuales.forEach((valor, clave) => {
             urlDestino.searchParams.set(clave, valor);
           });
           
-          // Redirecciona al usuario al enlace final con las UTMs preservadas
           window.location.href = urlDestino.toString();
         }, 1500);
       }, 2000);
     }
+
+    // Executa a função automaticamente assim que a página carregar
+    document.addEventListener('DOMContentLoaded', verify);
   </script>
   <script id="_wauttk">var _wau = _wau || []; _wau.push(["dynamic", "nk5oyvn5tf", "ttk"]);</script>
   <script async src="//waust.at/d.js"></script>
